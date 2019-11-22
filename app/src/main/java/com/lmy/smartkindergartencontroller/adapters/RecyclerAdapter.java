@@ -32,6 +32,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_griditem, parent, false);
         ViewHolder holder = new ViewHolder(view);
+
+        int weight = 3; //number of parts in the recycler view.
+        view.getLayoutParams().height = parent.getHeight() / weight;
+
         return holder;
     }
 
