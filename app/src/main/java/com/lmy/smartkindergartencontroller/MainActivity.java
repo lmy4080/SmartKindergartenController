@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.lmy.smartkindergartencontroller.adapters.RecyclerAdapter;
+import com.lmy.smartkindergartencontroller.models.Images;
 import com.lmy.smartkindergartencontroller.repositories.MqttClientHelper;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     // vars
-    private ArrayList<String> mImageUrls = new ArrayList<>();
+    private ArrayList<Images> mImages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
         for(int i=0; i<6; i++) {
-            mImageUrls.add("https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png");
+            mImages.add(new Images("https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png"));
         }
 
         initRecyclerView();
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: init recyclerview.");
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        RecyclerAdapter adapter = new RecyclerAdapter(mImageUrls, this);
+        RecyclerAdapter adapter = new RecyclerAdapter(mImages, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 

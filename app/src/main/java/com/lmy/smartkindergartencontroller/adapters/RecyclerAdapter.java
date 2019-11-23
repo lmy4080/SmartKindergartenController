@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lmy.smartkindergartencontroller.R;
+import com.lmy.smartkindergartencontroller.models.Images;
 import com.lmy.smartkindergartencontroller.repositories.MqttClientHelper;
 
 import java.util.ArrayList;
@@ -21,10 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";
-    private ArrayList<String> mImages = new ArrayList<>();
+    private ArrayList<Images> mImages = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerAdapter(ArrayList<String> mImages, Context mContext) {
+    public RecyclerAdapter(ArrayList<Images> mImages, Context mContext) {
         this.mImages = mImages;
         this.mContext = mContext;
     }
@@ -47,14 +48,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         Glide.with(mContext)
                 .asBitmap()
-                .load(mImages.get(position))
+                .load(mImages.get(position).getImageUrl())
                 .into(holder.image);
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clied on: " + position);
-                Toast.makeText(mContext, mImages.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, mImages.get(position).getImageUrl(), Toast.LENGTH_SHORT).show();
                 MqttClientHelper.getInstance().publish(position);
             }
         });
