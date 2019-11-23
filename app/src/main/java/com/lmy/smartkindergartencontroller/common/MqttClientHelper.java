@@ -1,4 +1,4 @@
-package com.lmy.smartkindergartencontroller.repositories;
+package com.lmy.smartkindergartencontroller.common;
 
 import android.content.Context;
 import android.util.Log;
