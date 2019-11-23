@@ -7,12 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lmy.smartkindergartencontroller.R;
 import com.lmy.smartkindergartencontroller.models.Images;
-import com.lmy.smartkindergartencontroller.repositories.MqttClientHelper;
+import com.lmy.smartkindergartencontroller.common.MqttClientHelper;
 
 import java.util.ArrayList;
 
@@ -51,6 +52,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 .load(mImages.get(position).getImageUrl())
                 .into(holder.image);
 
+        holder.title.setText(mImages.get(position).getTitle());
+
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,12 +71,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private TextView title;
         private ImageView image;
         private RelativeLayout parentLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
+            title = itemView.findViewById(R.id.title);
             image = itemView.findViewById(R.id.image);
             parentLayout = itemView.findViewById(R.id.layout_parent);
         }
