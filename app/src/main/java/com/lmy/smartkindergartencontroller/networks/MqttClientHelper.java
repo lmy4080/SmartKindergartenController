@@ -1,7 +1,9 @@
-package com.lmy.smartkindergartencontroller.common;
+package com.lmy.smartkindergartencontroller.networks;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.lmy.smartkindergartencontroller.testInterface;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
@@ -17,48 +19,28 @@ public class MqttClientHelper {
 
     private static final String TAG = "MqttClientHelper";
 
-    private static MqttClientHelper mqttClientHelper;
-
     private MqttAndroidClient mqttAndroidClient;
 
     private Context mContext;
+    private testInterface listener;
 
     private String mMqttServerUri;
     private String mMqttServerPort;
     private String mSubscribeTopic;
     private String mPublishTopic;
-    private String mPublishOnLed;
-    private String mPublishOnMotor;
-    private String mPublishOnTemp;
-    private String mPublishOnHumid;
-    private String mPublishOnUltra;
-    private String mPublishOnVideo;
 
-    private MqttClientHelper() {
+    public MqttClientHelper(Context mContext, testInterface mTestInterface) {
+
+        this.mContext = mContext;
+        this.listener=mTestInterface;
 
         mMqttServerUri = "tcp://mqtt.eclipse.org";
         mMqttServerPort = "1883";
         mSubscribeTopic = "korea/subscribe";
         mPublishTopic = "korea/publish";
-        mPublishOnLed = "";
-        mPublishOnMotor = "";
-        mPublishOnTemp = "";
-        mPublishOnHumid = "";
-        mPublishOnUltra = "";
-        mPublishOnVideo = "";
-
     }
 
-    public static MqttClientHelper getInstance() {
-        if(mqttClientHelper == null) {
-            mqttClientHelper = new MqttClientHelper();
-        }
-        return mqttClientHelper;
-    }
-
-    public void init(Context mContext) {
-
-        this.mContext = mContext;
+    public void init() {
 
         mqttAndroidClient = new MqttAndroidClient(mContext, mMqttServerUri+":"+mMqttServerPort, MqttClient.generateClientId());
 
@@ -114,6 +96,8 @@ public class MqttClientHelper {
                 public void messageArrived(String topic, MqttMessage message) throws Exception { // 구독 시 callback 함수
                     String msg = new String(message.getPayload());
                     Log.d(TAG, "messageArrived: " + msg);
+
+                    listener.foo(msg);
                 }
             });
         }
@@ -131,3 +115,4 @@ public class MqttClientHelper {
         }
     }
 }
+
