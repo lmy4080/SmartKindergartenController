@@ -8,17 +8,22 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.lmy.smartkindergartencontroller.adapters.RecyclerAdapter;
+import com.lmy.smartkindergartencontroller.contracts.MainContract;
 import com.lmy.smartkindergartencontroller.models.Images;
-import com.lmy.smartkindergartencontroller.repositories.MqttClientHelper;
+import com.lmy.smartkindergartencontroller.networks.MqttClientHelper;
+import com.lmy.smartkindergartencontroller.presenters.MainPresenter;
+import com.lmy.smartkindergartencontroller.repositories.ImageRepository;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements testInterface, MainContract.View {
 
     private static final String TAG = "MainActivity";
 
     // vars
-    private ArrayList<Images> mImages = new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    private RecyclerAdapter mAdapter;
+    private MainContract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,31 +31,50 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: started.");
 
-        initImageBitmaps();
-    }
+        mRecyclerView = findViewById(R.id.recycler_view);
 
-    private void initImageBitmaps() {
-        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+        mPresenter = new MainPresenter();
+        mPresenter.attachView(this);
+        mPresenter.setImageItems(ImageRepository.getInstance());
 
-        for(int i=0; i<6; i++) {
-            mImages.add(new Images("https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png"));
-        }
+        mAdapter = new RecyclerAdapter(this);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        initRecyclerView();
-    }
-
-    private void initRecyclerView() {
-        Log.d(TAG, "initRecyclerView: init recyclerview.");
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        RecyclerAdapter adapter = new RecyclerAdapter(mImages, this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        mPresenter.loadItems();
 
         initMqttClient();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        mPresenter.detachView();
+    }
+
+    @Override
+    public void foo(String msg) {
+        Log.d(TAG, "foo: subscribed called : " + msg);
+
+        //mAdapter.modifyImages(msg);
+        mRecyclerView.getLayoutManager().smoothScrollToPosition(mRecyclerView, null, 0);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void addItems(ArrayList<Images> images) {
+        mAdapter.setmImages(images);
+    }
+
+    @Override
+    public void notifyAdapter() {
+        mAdapter.notifyDataSetChanged();
+    }
+
     private void initMqttClient() {
         Log.d(TAG, "initMqttClient: init mqttclient");
-        MqttClientHelper.getInstance().init(this);
+        MqttClientHelper mqttClientHelper = new MqttClientHelper(this, this);
+        mqttClientHelper.init();
     }
 }

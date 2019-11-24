@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.lmy.smartkindergartencontroller.R;
 import com.lmy.smartkindergartencontroller.models.Images;
-import com.lmy.smartkindergartencontroller.common.MqttClientHelper;
 
 import java.util.ArrayList;
 
@@ -26,10 +25,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private ArrayList<Images> mImages = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerAdapter(ArrayList<Images> mImages, Context mContext) {
-        this.mImages = mImages;
+    public RecyclerAdapter(Context mContext) {
         this.mContext = mContext;
     }
+
+    public ArrayList<Images> getmImages() {
+        return mImages;
+    }
+
+    public void setmImages(ArrayList<Images> mImages) {
+        this.mImages = mImages;
+    }
+
+//    public void modifyImages(String text) {
+//        Log.d(TAG, "modifyImages: called.");
+//
+//        mImages.set(2, new Images(text, "https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png"));
+//    }
 
     @NonNull
     @Override
@@ -59,7 +71,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clied on: " + position);
                 Toast.makeText(mContext, mImages.get(position).getImageUrl(), Toast.LENGTH_SHORT).show();
-                MqttClientHelper.getInstance().publish(position);
+                //MqttClientHelper.getInstance().publish(position);
             }
         });
     }
