@@ -32,11 +32,15 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         mRecyclerView = findViewById(R.id.recycler_view);
 
+        mAdapter = new RecyclerAdapter(this);
+
         mPresenter = new MainPresenter(this);
         mPresenter.attachView(this);
+
+        mPresenter.setRecyclerAdapterModel(mAdapter);
+        mPresenter.setRecyclerAdapterView(mAdapter);
         mPresenter.setImageItems(ImageRepository.getInstance());
 
-        mAdapter = new RecyclerAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
@@ -53,18 +57,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     @Override
-    public void addItems(ArrayList<Images> images) {
-        mAdapter.setmImages(images);
-    }
-
-    @Override
-    public void addItems(int flag, String payload) {
-        mAdapter.setmImages(flag, payload);
+    public void updateScreen() {
         mRecyclerView.getLayoutManager().smoothScrollToPosition(mRecyclerView, null, 0);
-    }
-
-    @Override
-    public void notifyAdapter() {
-        mAdapter.notifyDataSetChanged();
     }
 }

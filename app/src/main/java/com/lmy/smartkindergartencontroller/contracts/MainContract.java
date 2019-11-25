@@ -1,24 +1,21 @@
 package com.lmy.smartkindergartencontroller.contracts;
 
-import com.lmy.smartkindergartencontroller.models.Images;
 import com.lmy.smartkindergartencontroller.repositories.ImageRepository;
-
-import java.util.ArrayList;
 
 public interface MainContract {
 
     interface View {
 
-        void addItems(ArrayList<Images> images);
-
-        void addItems(int flag, String payload);
-
-        void notifyAdapter();
+        void updateScreen();
     }
 
     interface Presenter {
 
         void attachView(View view);
+
+        void setRecyclerAdapterModel(RecyclerAdapterContract.Model adapterModel);
+
+        void setRecyclerAdapterView(RecyclerAdapterContract.View adapterView);
 
         void detachView();
 

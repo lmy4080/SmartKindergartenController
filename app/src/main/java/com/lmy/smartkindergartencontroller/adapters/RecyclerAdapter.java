@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lmy.smartkindergartencontroller.R;
+import com.lmy.smartkindergartencontroller.contracts.RecyclerAdapterContract;
 import com.lmy.smartkindergartencontroller.models.Images;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> implements RecyclerAdapterContract.Model, RecyclerAdapterContract.View {
 
     private static final String TAG = "RecyclerAdapter";
     private ArrayList<Images> mImages = new ArrayList<>();
@@ -37,8 +38,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         this.mImages = mImages;
     }
 
+    @Override
     public void setmImages(int flag, String payload) {
         this.mImages.set(flag, new Images(payload, "https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png"));
+    }
+
+    @Override
+    public void notifyAdapter() {
+        notifyDataSetChanged();
     }
 
     @NonNull
