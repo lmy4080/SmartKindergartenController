@@ -37,11 +37,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         this.mImages = mImages;
     }
 
-//    public void modifyImages(String text) {
-//        Log.d(TAG, "modifyImages: called.");
-//
-//        mImages.set(2, new Images(text, "https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png"));
-//    }
+    public void setmImages(int flag, String payload) {
+        this.mImages.set(flag, new Images(payload, "https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png"));
+    }
 
     @NonNull
     @Override

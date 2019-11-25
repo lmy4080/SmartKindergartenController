@@ -11,6 +11,8 @@ public interface MainContract {
 
         void addItems(ArrayList<Images> images);
 
+        void addItems(int flag, String payload);
+
         void notifyAdapter();
     }
 
@@ -24,5 +26,6 @@ public interface MainContract {
 
         void loadItems();
 
+        void initMqttClient();
     }
 }

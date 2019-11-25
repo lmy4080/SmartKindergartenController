@@ -10,13 +10,12 @@ import android.util.Log;
 import com.lmy.smartkindergartencontroller.adapters.RecyclerAdapter;
 import com.lmy.smartkindergartencontroller.contracts.MainContract;
 import com.lmy.smartkindergartencontroller.models.Images;
-import com.lmy.smartkindergartencontroller.networks.MqttClientHelper;
 import com.lmy.smartkindergartencontroller.presenters.MainPresenter;
 import com.lmy.smartkindergartencontroller.repositories.ImageRepository;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements testInterface, MainContract.View {
+public class MainActivity extends AppCompatActivity implements MainContract.View {
 
     private static final String TAG = "MainActivity";
 
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements testInterface, Ma
 
         mRecyclerView = findViewById(R.id.recycler_view);
 
-        mPresenter = new MainPresenter();
+        mPresenter = new MainPresenter(this);
         mPresenter.attachView(this);
         mPresenter.setImageItems(ImageRepository.getInstance());
 
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements testInterface, Ma
 
         mPresenter.loadItems();
 
-        initMqttClient();
+        mPresenter.initMqttClient();
     }
 
     @Override
@@ -54,27 +53,18 @@ public class MainActivity extends AppCompatActivity implements testInterface, Ma
     }
 
     @Override
-    public void foo(String msg) {
-        Log.d(TAG, "foo: subscribed called : " + msg);
-
-        //mAdapter.modifyImages(msg);
-        mRecyclerView.getLayoutManager().smoothScrollToPosition(mRecyclerView, null, 0);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
     public void addItems(ArrayList<Images> images) {
         mAdapter.setmImages(images);
     }
 
     @Override
-    public void notifyAdapter() {
-        mAdapter.notifyDataSetChanged();
+    public void addItems(int flag, String payload) {
+        mAdapter.setmImages(flag, payload);
+        mRecyclerView.getLayoutManager().smoothScrollToPosition(mRecyclerView, null, 0);
     }
 
-    private void initMqttClient() {
-        Log.d(TAG, "initMqttClient: init mqttclient");
-        MqttClientHelper mqttClientHelper = new MqttClientHelper(this, this);
-        mqttClientHelper.init();
+    @Override
+    public void notifyAdapter() {
+        mAdapter.notifyDataSetChanged();
     }
 }

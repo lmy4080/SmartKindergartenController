@@ -3,8 +3,6 @@ package com.lmy.smartkindergartencontroller.networks;
 import android.content.Context;
 import android.util.Log;
 
-import com.lmy.smartkindergartencontroller.testInterface;
-
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -22,17 +20,17 @@ public class MqttClientHelper {
     private MqttAndroidClient mqttAndroidClient;
 
     private Context mContext;
-    private testInterface listener;
+    private MqttClientHelperInterface mListener;
 
     private String mMqttServerUri;
     private String mMqttServerPort;
     private String mSubscribeTopic;
     private String mPublishTopic;
 
-    public MqttClientHelper(Context mContext, testInterface mTestInterface) {
+    public MqttClientHelper(Context mContext, MqttClientHelperInterface listener) {
 
         this.mContext = mContext;
-        this.listener=mTestInterface;
+        this.mListener = listener;
 
         mMqttServerUri = "tcp://mqtt.eclipse.org";
         mMqttServerPort = "1883";
@@ -94,10 +92,28 @@ public class MqttClientHelper {
             mqttAndroidClient.subscribe(mSubscribeTopic, 0, new IMqttMessageListener() { // korea/lmy 구독
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception { // 구독 시 callback 함수
-                    String msg = new String(message.getPayload());
-                    Log.d(TAG, "messageArrived: " + msg);
+                    String payload = new String(message.getPayload());
+                    Log.d(TAG, "messageArrived: " + payload);
 
-                    listener.foo(msg);
+                    /**
+                     * Temperature : "0"
+                     * Humid       : "1"
+                     * Ultra       : "2"
+                     */
+                    String[] payloads = payload.split("/");
+                    Log.d(TAG, "messageArrived: " + payloads[0] + ", " + payloads[1]);
+                    switch (payloads[0]) {
+                        case "TEMP":
+                            mListener.sendPayload(0, payloads[1]);
+                            break;
+                        case "HUMID":
+                            mListener.sendPayload(1, payloads[1]);
+                            break;
+                        case "ULTRA":
+                            mListener.sendPayload(2, payloads[1]);
+                            break;
+                    }
+
                 }
             });
         }
