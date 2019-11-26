@@ -1,10 +1,8 @@
 package com.lmy.smartkindergartencontroller.presenters;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.lmy.smartkindergartencontroller.contracts.RecyclerAdapterContract;
-import com.lmy.smartkindergartencontroller.listeners.OnItemClickListener;
 import com.lmy.smartkindergartencontroller.networks.MqttClientHelperInterface;
 import com.lmy.smartkindergartencontroller.contracts.MainContract;
 import com.lmy.smartkindergartencontroller.models.Images;
@@ -13,7 +11,7 @@ import com.lmy.smartkindergartencontroller.repositories.ImageRepository;
 
 import java.util.ArrayList;
 
-public class MainPresenter implements MainContract.Presenter, MqttClientHelperInterface, OnItemClickListener {
+public class MainPresenter implements MainContract.Presenter, MqttClientHelperInterface {
 
     private static final String TAG = "MainPresenter";
 
@@ -42,18 +40,6 @@ public class MainPresenter implements MainContract.Presenter, MqttClientHelperIn
     @Override
     public void setRecyclerAdapterView(RecyclerAdapterContract.View adapterView) {
         this.mAdapterView = adapterView;
-        this.mAdapterView.setOnClickListener(this);
-    }
-
-    @Override
-    public void onItemClick(int position) {
-        Log.d(TAG, "onItemClick: called. position : " + position);
-        if(this.mqttClientHelper.publish(position)) {
-            mView.switchImageItem(position);
-        }
-        else {
-
-        }
     }
 
     @Override
