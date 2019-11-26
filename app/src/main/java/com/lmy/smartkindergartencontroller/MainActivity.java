@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     // vars for sensors
     private boolean mLedIsOn = false;
     private boolean mMotorIsOn = false;
+    private boolean mParkingIsOn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,20 +68,36 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void switchImageItem(int position) {
 
         if(position == 2) { // LED
-            if(mLedIsOn) { // if Led is on,
-                mAdapter.switchImage(position, "LED : ON", imageUrl);
+            if(mLedIsOn) { // if Led is on, turn it off
+                mAdapter.switchImage(position, "LIGHT : OFF", R.drawable.led_off);
+                mLedIsOn = false;
             }
-            else { // if Led is off,
-
+            else { // if Led is off, turn it on
+                mAdapter.switchImage(position, "LIGHT :  ON", R.drawable.led_on);
+                mLedIsOn = true;
             }
         }
 
-        if(position == 3) { // MOTOR
-            if(mMotorIsOn) { // if Motor is on,
-
+        if(position == 3) { // MOTOR, Curtains
+            if(mMotorIsOn) { // if Motor is on, turn it off
+                mAdapter.switchImage(position, "CURTAINS : OFF", R.drawable.curtain_off);
+                mMotorIsOn = false;
             }
-            else { // if Motor is off,
+            else { // if Motor is off, turn it on
+                mAdapter.switchImage(position, "CURTAINS :  ON", R.drawable.curtain_on);
+                mMotorIsOn = true;
+            }
+        }
 
+        if(position == 5) { // ULTRA, Parking
+            Log.d(TAG, "switchImageItem: called. pos : " + position);
+            if(mParkingIsOn) { // if Parking lot is occupied,
+                mAdapter.switchImage(position, "PARKING : VACANT", R.drawable.parking_off);
+                mParkingIsOn = false;
+            }
+            else { // if Parking lot is vacant,
+                mAdapter.switchImage(position, "PARKING :   FULL", R.drawable.parking_on);
+                mParkingIsOn = true;
             }
         }
     }

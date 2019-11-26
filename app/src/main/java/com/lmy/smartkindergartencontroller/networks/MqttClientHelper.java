@@ -98,7 +98,7 @@ public class MqttClientHelper {
                     /**
                      * Temperature : "0"
                      * Humid       : "1"
-                     * Ultra       : "2"
+                     * Ultra       : "5" - Parking
                      */
                     String[] payloads = payload.split("/");
                     Log.d(TAG, "messageArrived: " + payloads[0] + ", " + payloads[1]);
@@ -109,8 +109,8 @@ public class MqttClientHelper {
                         case "HUMID":
                             mListener.sendPayload(1, payloads[1]);
                             break;
-                        case "ULTRA":
-                            mListener.sendPayload(2, payloads[1]);
+                        case "PARKING":
+                            mListener.sendPayload(5, payloads[1]);
                             break;
                     }
 

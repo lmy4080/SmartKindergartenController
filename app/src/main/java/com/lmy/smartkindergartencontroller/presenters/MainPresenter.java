@@ -50,6 +50,8 @@ public class MainPresenter implements MainContract.Presenter, MqttClientHelperIn
         Log.d(TAG, "onItemClick: called. position : " + position);
         if(this.mqttClientHelper.publish(position)) {
             mView.switchImageItem(position);
+            mView.updateScreen();
+            mAdapterView.notifyAdapter();
         }
         else {
 
@@ -81,8 +83,16 @@ public class MainPresenter implements MainContract.Presenter, MqttClientHelperIn
 
     @Override
     public void sendPayload(int flag, String payload) {
-        mAdapterModel.setmImages(flag, payload);
-        mView.updateScreen();
-        mAdapterView.notifyAdapter();
+        Log.d(TAG, "sendPayload: called.");
+        if(flag == 5) { // Ultra, Parking
+            mView.switchImageItem(flag);
+            mView.updateScreen();
+            mAdapterView.notifyAdapter();
+        }
+        else {
+            mAdapterModel.setmImages(flag, payload);
+            mView.updateScreen();
+            mAdapterView.notifyAdapter();
+        }
     }
 }
