@@ -11,9 +11,9 @@
     <!-- MainActivity theme. -->
     <style name="MainActivityTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/mainActivityColorPrimary</item>
-        <item name="colorPrimaryDark">@color/mainActivityColorPrimary</item>
-        <item name="colorAccent">@color/mainActivityColorPrimary</item>
+        <item name="colorPrimary">@color/mActivityPrimary</item>
+        <item name="colorPrimaryDark">@color/mActivityPrimary</item>
+        <item name="colorAccent">@color/mActivityPrimary</item>
     </style>
 
 </resources>

@@ -4,7 +4,10 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="mainActivityColorPrimary">#005766</color>
-    <color name="mainActivityColorPrimaryDark">#004554</color>
-    <color name="mainActivityColorPrimaryAccent">#003342</color>
+    <!-- MainActivity -->
+    <color name="mActivityPrimary">#005766</color>
+    <color name="mActivityPrimaryDark">#004554</color>
+    <color name="mActivityPrimaryAccent">#003342</color>
+    <color name="mActivityRecyclerViewBackground">#E1E1E1</color>
+    <color name="mActivityRecyclerViewFrameLayoutBackground">#D9FFFFFF</color>
 </resources>
