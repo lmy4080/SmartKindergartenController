@@ -123,12 +123,25 @@ public class MqttClientHelper {
         }
     }
 
-    public void publish(int position) {
+    public boolean publish(int position) {
         try {
-            mqttAndroidClient.publish(mPublishTopic, Integer.toString(position).getBytes(), 0, false);
-        } catch (MqttException e) {
-            e.printStackTrace();
+            /**
+             * Led         : "2"
+             * Motor       : "3"
+             */
+            switch (position) {
+                case 2:
+                case 3:
+                    mqttAndroidClient.publish(mPublishTopic, Integer.toString(position).getBytes(), 0, false);
+                    return true;
+            }
         }
+        catch(MqttException e)
+        {
+            e.printStackTrace();
+            return  false;
+        }
+        return  false;
     }
 }
 

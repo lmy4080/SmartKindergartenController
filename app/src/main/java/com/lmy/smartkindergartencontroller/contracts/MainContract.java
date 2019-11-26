@@ -6,6 +6,8 @@ public interface MainContract {
 
     interface View {
 
+        void switchImageItem(int position);
+
         void updateScreen();
     }
 

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.lmy.smartkindergartencontroller.R;
 import com.lmy.smartkindergartencontroller.contracts.RecyclerAdapterContract;
+import com.lmy.smartkindergartencontroller.listeners.OnItemClickListener;
 import com.lmy.smartkindergartencontroller.models.Images;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> implements RecyclerAdapterContract.Model, RecyclerAdapterContract.View {
 
     private static final String TAG = "RecyclerAdapter";
+    private OnItemClickListener mOnItemClickListener;
     private ArrayList<Images> mImages = new ArrayList<>();
     private Context mContext;
 
@@ -32,6 +34,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     public ArrayList<Images> getmImages() {
         return mImages;
+    }
+
+    public void switchImage(int flag, String title, String imageUrl) {
+        this.mImages.set(flag, new Images(title, imageUrl));
     }
 
     public void setmImages(ArrayList<Images> mImages) {
@@ -48,6 +54,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    @Override
+    public void setOnClickListener(OnItemClickListener clickListener) {
+        this.mOnItemClickListener = clickListener;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -61,7 +72,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
         Glide.with(mContext)
@@ -76,7 +87,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clied on: " + position);
                 Toast.makeText(mContext, mImages.get(position).getImageUrl(), Toast.LENGTH_SHORT).show();
-                //MqttClientHelper.getInstance().publish(position);
+
+                if(holder.onItemClickListener != null) {
+                    holder.onItemClickListener.onItemClick(position);
+                }
             }
         });
     }
@@ -88,12 +102,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private OnItemClickListener onItemClickListener;
+
         private TextView title;
         private ImageView image;
         private RelativeLayout parentLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
+
+            this.onItemClickListener = mOnItemClickListener;
 
             title = itemView.findViewById(R.id.title);
             image = itemView.findViewById(R.id.image);
