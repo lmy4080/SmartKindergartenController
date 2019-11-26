@@ -9,11 +9,8 @@ import android.util.Log;
 
 import com.lmy.smartkindergartencontroller.adapters.RecyclerAdapter;
 import com.lmy.smartkindergartencontroller.contracts.MainContract;
-import com.lmy.smartkindergartencontroller.models.Images;
 import com.lmy.smartkindergartencontroller.presenters.MainPresenter;
 import com.lmy.smartkindergartencontroller.repositories.ImageRepository;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
@@ -23,6 +20,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private RecyclerView mRecyclerView;
     private RecyclerAdapter mAdapter;
     private MainContract.Presenter mPresenter;
+
+    // vars for sensors
+    private boolean mLedIsOn = false;
+    private boolean mMotorIsOn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,29 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @Override
     public void updateScreen() {
+
         mRecyclerView.getLayoutManager().smoothScrollToPosition(mRecyclerView, null, 0);
+    }
+
+    @Override
+    public void switchImageItem(int position) {
+
+        if(position == 2) { // LED
+            if(mLedIsOn) { // if Led is on,
+                mAdapter.switchImage(position, "LED : ON", imageUrl);
+            }
+            else { // if Led is off,
+
+            }
+        }
+
+        if(position == 3) { // MOTOR
+            if(mMotorIsOn) { // if Motor is on,
+
+            }
+            else { // if Motor is off,
+
+            }
+        }
     }
 }
