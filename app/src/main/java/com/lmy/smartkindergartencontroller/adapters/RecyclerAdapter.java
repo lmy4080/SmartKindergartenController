@@ -36,8 +36,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return mImages;
     }
 
-    public void switchImage(int flag, String title, String imageUrl) {
-        this.mImages.set(flag, new Images(title, imageUrl));
+    public void switchImage(int flag, String title, int imageResId) {
+        this.mImages.set(flag, new Images(title, imageResId));
     }
 
     public void setmImages(ArrayList<Images> mImages) {
@@ -46,7 +46,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void setmImages(int flag, String payload) {
-        this.mImages.set(flag, new Images(payload, "https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png"));
+        this.mImages.set(flag, new Images(payload, mImages.get(flag).getImageResId()));
     }
 
     @Override
@@ -77,7 +77,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         Glide.with(mContext)
                 .asBitmap()
-                .load(mImages.get(position).getImageUrl())
+                .load(mImages.get(position).getImageResId())
                 .into(holder.image);
 
         holder.title.setText(mImages.get(position).getTitle());
@@ -85,8 +85,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: clied on: " + position);
-                Toast.makeText(mContext, mImages.get(position).getImageUrl(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onClick: " + position);
+                Toast.makeText(mContext, mImages.get(position).getImageResId(), Toast.LENGTH_SHORT).show();
 
                 if(holder.onItemClickListener != null) {
                     holder.onItemClickListener.onItemClick(position);

@@ -1,5 +1,6 @@
 package com.lmy.smartkindergartencontroller.repositories;
 
+import com.lmy.smartkindergartencontroller.R;
 import com.lmy.smartkindergartencontroller.models.Images;
 
 import java.util.ArrayList;
@@ -26,11 +27,11 @@ public class ImageRepository {
     }
 
     public void setImages() {
-        dataSet.add(new Images("Temp", "https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png"));
-        dataSet.add(new Images("Humid", "https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png"));
-        dataSet.add(new Images("Led", "https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png"));
-        dataSet.add(new Images("Motor", "https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png"));
-        dataSet.add(new Images("Video", "https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png"));
-        dataSet.add(new Images("Ultra", "https://cdn1.iconfinder.com/data/icons/business-5/512/light_bulb_7-512.png"));
+        dataSet.add(new Images("TEMP : 0", R.drawable.temp));
+        dataSet.add(new Images("HUMID : 0", R.drawable.humid));
+        dataSet.add(new Images("LIGHT : OFF", R.drawable.led_off));
+        dataSet.add(new Images("CURTAINS : OFF", R.drawable.curtain_off));
+        dataSet.add(new Images("CCTV : ", R.drawable.cctv));
+        dataSet.add(new Images("PARKING : VACANT", R.drawable.parking_off));
     }
 }

@@ -2,27 +2,27 @@ package com.lmy.smartkindergartencontroller.models;
 
 public class Images {
 
-    private String title;
-    private String imageUrl;
+    private String mTitle;
+    private int mImageResId;
 
-    public Images(String title, String imageUrl) {
-        this.title = title;
-        this.imageUrl = imageUrl;
+    public Images(String mTitle, int mImageResId) {
+        this.mTitle = mTitle;
+        this.mImageResId = mImageResId;
     }
 
     public String getTitle() {
-        return title;
+        return mTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String mTitle) {
+        this.mTitle = mTitle;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public int getImageResId() {
+        return mImageResId;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageResId(int mImageResId) {
+        this.mImageResId = mImageResId;
     }
 }
