@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- MainActivity theme. -->
+    <style name="MainActivityTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/mainActivityColorPrimary</item>
+        <item name="colorPrimaryDark">@color/mainActivityColorPrimary</item>
+        <item name="colorAccent">@color/mainActivityColorPrimary</item>
+    </style>
+
 </resources>
