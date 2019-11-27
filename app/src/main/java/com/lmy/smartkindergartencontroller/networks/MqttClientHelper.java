@@ -27,6 +27,8 @@ public class MqttClientHelper {
     private String mSubscribeTopic;
     private String mPublishTopic;
 
+    private String mVideoUrl;
+
     public MqttClientHelper(Context mContext, MqttClientHelperInterface listener) {
 
         this.mContext = mContext;
@@ -36,6 +38,8 @@ public class MqttClientHelper {
         mMqttServerPort = "1883";
         mSubscribeTopic = "korea/subscribe";
         mPublishTopic = "korea/publish";
+
+        mVideoUrl = null;
     }
 
     public void init() {
@@ -98,16 +102,20 @@ public class MqttClientHelper {
                     /**
                      * Temperature : "0"
                      * Humid       : "1"
+                     * Video       : "4" - CCTV
                      * Ultra       : "5" - Parking
                      */
-                    String[] payloads = payload.split("/");
-                    Log.d(TAG, "messageArrived: " + payloads[0] + ", " + payloads[1]);
+                    String[] payloads = payload.split("#");
+                    Log.d(TAG, "payload[0]: " + payloads[0] + "payload[1]: " + payloads[1] );
                     switch (payloads[0]) {
                         case "TEMP":
                             mListener.sendPayload(0, payloads[1]);
                             break;
                         case "HUMID":
                             mListener.sendPayload(1, payloads[1]);
+                            break;
+                        case "CCTV":
+                            mVideoUrl = payloads[1];
                             break;
                         case "PARKING":
                             mListener.sendPayload(5, payloads[1]);
@@ -133,6 +141,9 @@ public class MqttClientHelper {
                 case 2:
                 case 3:
                     mqttAndroidClient.publish(mPublishTopic, Integer.toString(position).getBytes(), 0, false);
+                    return true;
+                case 4:
+                    mListener.moveVideoSite(mVideoUrl);
                     return true;
             }
         }

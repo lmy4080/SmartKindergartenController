@@ -2,6 +2,7 @@ package com.lmy.smartkindergartencontroller.presenters;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.lmy.smartkindergartencontroller.contracts.RecyclerAdapterContract;
 import com.lmy.smartkindergartencontroller.listeners.OnItemClickListener;
@@ -93,6 +94,17 @@ public class MainPresenter implements MainContract.Presenter, MqttClientHelperIn
             mAdapterModel.setmImages(flag, payload);
             mView.updateScreen();
             mAdapterView.notifyAdapter();
+        }
+    }
+
+    @Override
+    public void moveVideoSite(String videoUrl) {
+        Log.d(TAG, "moveVideoSite: called.");
+        if(videoUrl != null) {
+            mView.moveVideoSite(videoUrl);
+        }
+        else {
+            Toast.makeText(mContext, "Url 정보를 받아오지 못했습니다.", Toast.LENGTH_LONG).show();
         }
     }
 }

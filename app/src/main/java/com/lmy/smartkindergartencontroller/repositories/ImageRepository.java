@@ -31,7 +31,7 @@ public class ImageRepository {
         dataSet.add(new Images("HUMID : 0", R.drawable.humid));
         dataSet.add(new Images("LIGHT : OFF", R.drawable.led_off));
         dataSet.add(new Images("CURTAINS : OFF", R.drawable.curtain_off));
-        dataSet.add(new Images("CCTV : ", R.drawable.cctv));
+        dataSet.add(new Images("OPEN ", R.drawable.cctv));
         dataSet.add(new Images("PARKING : VACANT", R.drawable.parking_off));
     }
 }

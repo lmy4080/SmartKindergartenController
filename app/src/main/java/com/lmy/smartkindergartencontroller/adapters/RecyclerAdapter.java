@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lmy.smartkindergartencontroller.R;
@@ -86,7 +85,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: " + position);
-                Toast.makeText(mContext, mImages.get(position).getImageResId(), Toast.LENGTH_SHORT).show();
 
                 if(holder.onItemClickListener != null) {
                     holder.onItemClickListener.onItemClick(position);

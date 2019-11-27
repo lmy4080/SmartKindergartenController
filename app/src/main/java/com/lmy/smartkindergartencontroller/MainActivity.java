@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -99,6 +101,17 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                 mAdapter.switchImage(position, "PARKING :   FULL", R.drawable.parking_on);
                 mParkingIsOn = true;
             }
+        }
+    }
+
+    @Override
+    public void moveVideoSite(String videoUrl) {
+
+        Uri uri = Uri.parse(videoUrl);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
         }
     }
 }

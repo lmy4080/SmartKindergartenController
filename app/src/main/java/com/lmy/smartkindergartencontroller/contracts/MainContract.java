@@ -9,6 +9,8 @@ public interface MainContract {
         void updateScreen();
 
         void switchImageItem(int position);
+
+        void moveVideoSite(String videoUrl);
     }
 
     interface Presenter {
