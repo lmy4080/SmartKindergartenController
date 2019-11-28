@@ -12,14 +12,26 @@
 #### 프로젝트 구성(Project Composition)
 
 - Android app(Smart Kindergarten Controller), Lollipop v22
-  [link]()
 - Raspberry Pi(IoT Sensors), v2 B+ Model
   [link]()
+- Cloud Mqtt Server [mqtt.eclipse.org]()
   
-#### SmartKindergartenController 앱 기능(SmartKindergartenController App Features)
+#### SmartKindergartenController App 기능(SmartKindergartenController App Features)
 
- -
+ - 온도를 IoT 디바이스 센서로부터 전달받아 화면에 실시간 표시 및 갱신
+ - 습도를 IoT 디바이스 센서로부터 전달받아 화면에 실시간 표시 및 갱신
+ - Light 버튼 클릭 시 IoT 디바이스 LED 소등 및 점등
+ - Curtains 버튼 클릭 시 IoT 디바이스 Motor 센서 동작
+ - CCTV 버튼 클릭 시 SmartKindergarten의 내부 실시간 감시 사이트로 이동
+ - SmartKindergarten 주차장의 상태 정보를 화면에 실시간 표시 및 갱신
  
-#### SmartKindergartenController 앱 시퀀스 다이어그램(SmartKindergartenController Sequence Diagram)
+#### SmartKindergartenController App 활용 기술 스택(SmartKindergartenController Used-Technical Stack Features)
 
- -
+ - MVP Design Pattern
+ - Paho Mqtt Library(IoT Communication Protocol)
+ 
+#### SmartKindergartenController App 시퀀스 다이어그램(SmartKindergartenController Sequence Diagram)
+
+<div>
+  <img width="700" src="https://user-images.githubusercontent.com/42701193/69820056-962f1c00-1243-11ea-8325-a8a00c978661.JPG">
+</div>
