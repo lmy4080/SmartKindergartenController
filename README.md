@@ -7,12 +7,12 @@
 
 #### 프로젝트 설명(Project Description)
 
--
+- 유치원 내부의 부착된 IoT 센서들을 사용자 모바일 어플리케이션을 통해 원격으로 제어 및 관리하는 시스템
 
 #### 프로젝트 구성(Project Composition)
 
 - Android app(Smart Kindergarten Controller), Lollipop v22
-- Raspberry Pi(IoT Sensors), v2 B+ Model
+- Raspberry Pi(Smart Kindergarten/IoT Sensors), v2 B+ Model
   [link]()
 - Cloud Mqtt Server [mqtt.eclipse.org]()
   
