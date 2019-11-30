@@ -13,8 +13,8 @@
 
 - Android app(Smart Kindergarten Controller), Lollipop v22
 - Raspberry Pi(Smart Kindergarten/IoT Sensors), v2 B+ Model
-  [link]()
-- Cloud Mqtt Server [mqtt.eclipse.org]()
+  [link](https://github.com/lmy4080/SmartKindergarten)
+- Cloud Mqtt Server [](mqtt.eclipse.org)
   
 #### SmartKindergartenController App 기능(SmartKindergartenController App Features)
 
