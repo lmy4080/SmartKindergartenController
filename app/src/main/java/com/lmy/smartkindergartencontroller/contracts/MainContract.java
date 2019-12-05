@@ -11,6 +11,8 @@ public interface MainContract {
         void switchImageItem(int position);
 
         void moveVideoSite(String videoUrl);
+
+        boolean getSensorStatus(int position);
     }
 
     interface Presenter {

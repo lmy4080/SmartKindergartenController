@@ -131,16 +131,25 @@ public class MqttClientHelper {
         }
     }
 
-    public boolean publish(int position) {
+    public boolean publish(int position, boolean flag) {
         try {
             /**
              * Led         : "2"
              * Motor       : "3"
              */
+            int status=0;
+            if(flag) {
+                status = 0;
+            }
+            else
+                status = 1;
+
             switch (position) {
                 case 2:
+                    mqttAndroidClient.publish(mPublishTopic, ("LED#" + status).getBytes(), 0, false);
+                    return true;
                 case 3:
-                    mqttAndroidClient.publish(mPublishTopic, Integer.toString(position).getBytes(), 0, false);
+                    mqttAndroidClient.publish(mPublishTopic, ("MOTOR#" + status).getBytes(), 0, false);
                     return true;
                 case 4:
                     mListener.moveVideoSite(mVideoUrl);

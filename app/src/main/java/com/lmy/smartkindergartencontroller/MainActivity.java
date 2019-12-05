@@ -114,4 +114,16 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             startActivity(intent);
         }
     }
+
+    @Override
+    public boolean getSensorStatus(int position) {
+        switch(position) {
+            case 2:
+                return mLedIsOn;
+            case 3:
+                return mMotorIsOn;
+        }
+
+        return false;
+    }
 }

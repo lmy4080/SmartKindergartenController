@@ -49,7 +49,7 @@ public class MainPresenter implements MainContract.Presenter, MqttClientHelperIn
     @Override
     public void onItemClick(int position) {
         Log.d(TAG, "onItemClick: called. position : " + position);
-        if(this.mqttClientHelper.publish(position)) {
+        if(mqttClientHelper.publish(position, mView.getSensorStatus(position))) {
             mView.switchImageItem(position);
             mView.updateScreen();
             mAdapterView.notifyAdapter();
