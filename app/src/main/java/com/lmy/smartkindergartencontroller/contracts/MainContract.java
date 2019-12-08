@@ -8,7 +8,7 @@ public interface MainContract {
 
         void updateScreen();
 
-        void switchImageItem(int position);
+        void switchImageItem(int position, int flag);
 
         void moveVideoSite(String videoUrl);
 

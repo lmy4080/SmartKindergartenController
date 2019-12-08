@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     // vars for sensors
     private boolean mLedIsOn = false;
     private boolean mMotorIsOn = false;
-    private boolean mParkingIsOn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +66,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     @Override
-    public void switchImageItem(int position) {
+    public void switchImageItem(int position, int flag) {
 
-        if(position == 2) { // LED
+        if(position == 2) { // LED, Lights
             if(mLedIsOn) { // if Led is on, turn it off
                 mAdapter.switchImage(position, "LIGHT : OFF", R.drawable.led_off);
                 mLedIsOn = false;
@@ -93,13 +92,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         if(position == 5) { // ULTRA, Parking
             Log.d(TAG, "switchImageItem: called. pos : " + position);
-            if(mParkingIsOn) { // if Parking lot is occupied,
+            if(flag == 0) { // if Parking lot is vacant,
                 mAdapter.switchImage(position, "PARKING : VACANT", R.drawable.parking_off);
-                mParkingIsOn = false;
             }
-            else { // if Parking lot is vacant,
+            else { // if Parking lot is occupied,
                 mAdapter.switchImage(position, "PARKING :   FULL", R.drawable.parking_on);
-                mParkingIsOn = true;
             }
         }
     }
@@ -109,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         Uri uri = Uri.parse(videoUrl);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        Log.d(TAG, "moveVideoSite: " + videoUrl);
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);

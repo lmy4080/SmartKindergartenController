@@ -50,7 +50,7 @@ public class MainPresenter implements MainContract.Presenter, MqttClientHelperIn
     public void onItemClick(int position) {
         Log.d(TAG, "onItemClick: called. position : " + position);
         if(mqttClientHelper.publish(position, mView.getSensorStatus(position))) {
-            mView.switchImageItem(position);
+            mView.switchImageItem(position, -1);
             mView.updateScreen();
             mAdapterView.notifyAdapter();
         }
@@ -86,7 +86,7 @@ public class MainPresenter implements MainContract.Presenter, MqttClientHelperIn
     public void sendPayload(int flag, String payload) {
         Log.d(TAG, "sendPayload: called.");
         if(flag == 5) { // Ultra, Parking
-            mView.switchImageItem(flag);
+            mView.switchImageItem(flag, Integer.parseInt(payload));
             mView.updateScreen();
             mAdapterView.notifyAdapter();
         }
