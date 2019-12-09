@@ -1,10 +1,3 @@
-# SmartKindergartenController
-
-<div>
-  <img width="300" hspace="20" src="https://user-images.githubusercontent.com/42701193/69752477-9f14e480-1194-11ea-9018-5089795e0f88.png">
-  <img width="300" src="https://user-images.githubusercontent.com/42701193/69752489-a76d1f80-1194-11ea-95bd-ddaaaf0ba993.png">
-</div>
-
 #### 프로젝트 설명(Project Description)
 
 - 유치원 내부에 부착된 IoT 센서들을 사용자 모바일 어플리케이션을 통해 원격으로 제어 및 관리하는 시스템
@@ -15,7 +8,20 @@
 - Raspberry Pi(Smart Kindergarten/IoT Sensors), v2 B+ Model
   [link](https://github.com/lmy4080/SmartKindergarten)
 - Cloud Mqtt Server [link](mqtt.eclipse.org)
-  
+
+#### 프로젝트 구성도(Project Architecture)
+
+<div>
+  <img width="600" src="https://user-images.githubusercontent.com/42701193/70446386-5b996f00-1ae0-11ea-81a2-cb266a171ce4.JPG">
+</div>
+
+# SmartKindergartenController
+
+<div>
+  <img width="300" hspace="20" src="https://user-images.githubusercontent.com/42701193/69752477-9f14e480-1194-11ea-9018-5089795e0f88.png">
+  <img width="300" src="https://user-images.githubusercontent.com/42701193/69752489-a76d1f80-1194-11ea-95bd-ddaaaf0ba993.png">
+</div>
+
 #### SmartKindergartenController App 기능(SmartKindergartenController App Features)
 
  - 온도를 IoT 디바이스 센서로부터 전달받아 화면에 실시간 표시 및 갱신
