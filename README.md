@@ -1,5 +1,13 @@
 # SmartKindergartenController
 
+Repository for the SmartKindergartenController Android App
+
+![GitHub code size in bytes](https://img.shields.io/badge/Min%20API%20Level-22-green)
+![GitHub code size in bytes](https://img.shields.io/badge/Max%20API%20Level-29-orange)
+![GitHub code size in bytes](https://img.shields.io/github/repo-size/lmy4080/SmartKindergartenController?color=blue)
+
+#### Screenshots
+
 <div>
   <img width="300" hspace="20" src="https://user-images.githubusercontent.com/42701193/69752477-9f14e480-1194-11ea-9018-5089795e0f88.png">
   <img width="300" src="https://user-images.githubusercontent.com/42701193/69752489-a76d1f80-1194-11ea-95bd-ddaaaf0ba993.png">
