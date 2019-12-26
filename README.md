@@ -41,3 +41,18 @@
 <div>
   <img width="700" src="https://user-images.githubusercontent.com/42701193/69820056-962f1c00-1243-11ea-8325-a8a00c978661.JPG">
 </div>
+
+#### Permissions Required
+
+1. ACCESS_NETWORK_STATE : 앱이 네트워크에 연결되었는지 확인 및 권한 설정
+2. INTERNET : 앱이 MQTT Broker Server와 통신하기 위해 필요한 인터넷 권한 설정
+
+#### Developers
+
+- Android app
+  - 이민영 ([@Min Young Lee](https://github.com/lmy4080))
+- RaspberryPi(Internet of things)
+  - 이민영 ([@Min Young Lee](https://github.com/lmy4080))
+  - 조건화 ([]())
+- Smart Kindergarten 모형
+  - 이소연 ([]())
